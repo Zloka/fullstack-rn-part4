@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: theme.margins.default,
+    backgroundColor: 'white',
   },
   textContainer: {
     marginLeft: theme.margins.default,

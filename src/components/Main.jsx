@@ -1,12 +1,22 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-native';
+import { View, StyleSheet } from 'react-native';
 
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
+import theme from '../theme';
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.mainBackground,
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+});
 
 const Main = () => {
   return (
-    <>
+    <View style={styles.container}>
       <AppBar />
       <Switch>
         <Route path="/" exact>
@@ -14,7 +24,7 @@ const Main = () => {
         </Route>
         <Redirect to="/" />
       </Switch>
-    </>
+    </View>
   );
 };
 
