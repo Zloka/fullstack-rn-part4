@@ -12,11 +12,15 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppBarRoute = ({ text, to}) => {
-  return (
+const AppBarRoute = ({ text, to, onPress }) => {
+  return to ? (
     <Link component={TouchableWithoutFeedback} to={to}>
       <Text style={styles.touchable}>{text}</Text>
     </Link>
+  ) : (
+    <TouchableWithoutFeedback onPress={onPress}>
+      <Text style={styles.touchable}>{text}</Text>
+    </TouchableWithoutFeedback>
   );
 };
 
