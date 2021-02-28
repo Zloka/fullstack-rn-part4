@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarRoute onPress={() => console.log("Hello world")} text="Repositories" />
-      <AppBarRoute onPress={() => console.log("Hello world")} text="Sign in" />
+      <AppBarRoute to="/" text="Repositories" />
+      <AppBarRoute to="/signin" text="Sign in" />
     </View>
   );
 };

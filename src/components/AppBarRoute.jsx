@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableWithoutFeedback, Text } from 'react-native';
+import { Link } from 'react-router-native';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
@@ -11,11 +12,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppBarRoute = ({ onPress, text}) => {
+const AppBarRoute = ({ text, to}) => {
   return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        <Text style={styles.touchable}>{text}</Text>
-      </TouchableWithoutFeedback>
+    <Link component={TouchableWithoutFeedback} to={to}>
+      <Text style={styles.touchable}>{text}</Text>
+    </Link>
   );
 };
 
