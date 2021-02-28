@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import React from 'react';
 import * as yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
 
 import SignInForm from './SignInForm';
 
@@ -19,8 +20,17 @@ const initialValues = {
 };
 
 const SignIn = () => {
-  const onSubmit = values => {
-    console.log({ values });
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
