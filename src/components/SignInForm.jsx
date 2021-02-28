@@ -1,16 +1,39 @@
 import React from 'react';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import theme from '../theme';
 import FormikTextInput from './FormikTextInput';
 import Text from './Text';
+
+const styles = StyleSheet.create({
+  container: {
+    padding: theme.margins.default,
+    backgroundColor: 'white',
+  },
+  textInput: {
+    marginBottom: theme.margins.default
+  },
+  button: {
+    height: 40,
+    borderRadius: 4,
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  languageText: {
+    color: 'white'
+  }
+});
 
 
 const SignInForm = ({ onSubmit }) => {
   return (
-    <View>
-      <FormikTextInput name="username" placeholder="Username" />
-      <FormikTextInput name="password" placeholder="Password" secureTextEntry />
+    <View style={styles.container}>
+      <FormikTextInput style={styles.textInput} name="username" placeholder="Username" />
+      <FormikTextInput style={styles.textInput} name="password" placeholder="Password" secureTextEntry />
       <TouchableWithoutFeedback onPress={onSubmit}>
-        <Text>Sign in</Text>
+        <View style={styles.button}>
+          <Text style={styles.languageText} fontWeight="bold">Sign in</Text>
+        </View>
       </TouchableWithoutFeedback>
     </View>
   );
