@@ -6,6 +6,7 @@ const theme = {
     appBarBackground: '#24292e',
     white: '#FFFFFF',
     mainBackground: '#e1e4e8',
+    errorRed: '#d73a4a'
   },
   fontSizes: {
     body: 14,
