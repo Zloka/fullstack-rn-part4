@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     padding: theme.margins.default,
     backgroundColor: 'white',
   },
-  textInput: {
-    marginBottom: theme.margins.default
+  topMargin: {
+    marginTop: theme.margins.default
   },
   button: {
     height: 40,
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
 const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
-      <FormikTextInput style={styles.textInput} name="username" placeholder="Username" />
-      <FormikTextInput style={styles.textInput} name="password" placeholder="Password" secureTextEntry />
+      <FormikTextInput name="username" placeholder="Username" />
+      <FormikTextInput style={styles.topMargin} name="password" placeholder="Password" secureTextEntry />
       <TouchableWithoutFeedback onPress={onSubmit}>
-        <View style={styles.button}>
+        <View style={[styles.button, styles.topMargin]}>
           <Text style={styles.languageText} fontWeight="bold">Sign in</Text>
         </View>
       </TouchableWithoutFeedback>
