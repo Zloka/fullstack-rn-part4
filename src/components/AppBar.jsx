@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.appBarBackground,
+    flexDirection: 'row',
   },
 });
 
@@ -15,6 +16,7 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <AppBarRoute onPress={() => console.log("Hello world")} text="Repositories" />
+      <AppBarRoute onPress={() => console.log("Hello world")} text="Sign in" />
     </View>
   );
 };
