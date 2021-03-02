@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
 });
 
 
-const RepoNumbers = ({ forksCount, stargazersCount, ratingAverage, reviewCount }) => {
+const RepoNumbers = ({ forksCount, stargazersCount, ratingAverage, reviewCount, id: repoId }) => {
   return (
     <View style={styles.flexContainer}>
-      <NumberAndTitle number={stargazersCount} title="Stars" />
-      <NumberAndTitle number={forksCount} title="Forks" />
-      <NumberAndTitle number={reviewCount} title="Reviews" />
-      <NumberAndTitle number={ratingAverage} title="Ratings" />
+      <NumberAndTitle repoId={repoId} number={stargazersCount} title="Stars" />
+      <NumberAndTitle repoId={repoId} number={forksCount} title="Forks" />
+      <NumberAndTitle repoId={repoId} number={reviewCount} title="Reviews" />
+      <NumberAndTitle repoId={repoId} number={ratingAverage} title="Ratings" />
     </View>
   );
 };

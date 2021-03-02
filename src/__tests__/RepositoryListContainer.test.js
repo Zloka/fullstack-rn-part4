@@ -1,3 +1,8 @@
+import React from 'react';
+import { render } from '@testing-library/react-native';
+import { RepositoryListContainer } from '../components/RepositoryList';
+import { prettifyNumber } from '../components/NumberAndTitle';
+
 describe('RepositoryList', () => {
   describe('RepositoryListContainer', () => {
     it('renders repository information correctly', () => {
@@ -44,7 +49,38 @@ describe('RepositoryList', () => {
         ],
       };
 
-      // Add your test code here
+      const { getByTestId } = render(<RepositoryListContainer repositories={repositories} />);
+      repositories.edges.forEach(edge => {
+        const  { node } = edge;
+        const fullName = getByTestId(`${node.id}-fullName`);
+        expect(fullName).toHaveTextContent(node.fullName);
+
+        const description = getByTestId(`${node.id}-description`);
+        expect(description).toHaveTextContent(node.description);
+
+        const language = getByTestId(`${node.id}-language`);
+        expect(language).toHaveTextContent(node.language);
+
+        const rating = getByTestId(`${node.id}-Ratings`);
+        expect(rating).toHaveTextContent('Ratings');
+        const ratingsCount = getByTestId(`${node.id}-Ratings-number`);
+        expect(ratingsCount).toHaveTextContent(prettifyNumber(node.ratingAverage));
+
+        const reviews = getByTestId(`${node.id}-Reviews`);
+        expect(reviews).toHaveTextContent('Reviews');
+        const reviewsCount = getByTestId(`${node.id}-Reviews-number`);
+        expect(reviewsCount).toHaveTextContent(prettifyNumber(node.reviewCount));
+
+        const stars = getByTestId(`${node.id}-Stars`);
+        expect(stars).toHaveTextContent('Stars');
+        const starsCount = getByTestId(`${node.id}-Stars-number`);
+        expect(starsCount).toHaveTextContent(prettifyNumber(node.stargazersCount));
+
+        const forks = getByTestId(`${node.id}-Forks`);
+        expect(forks).toHaveTextContent('Forks');
+        const forksCount = getByTestId(`${node.id}-Forks-number`);
+        expect(forksCount).toHaveTextContent(prettifyNumber(node.forksCount));
+      });
     });
   });
 });

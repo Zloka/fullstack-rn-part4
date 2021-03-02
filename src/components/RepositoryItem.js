@@ -41,14 +41,14 @@ const RepositoryItem = ({ id, fullName, description, language, forksCount, starg
       <View style={styles.flexContainer}>
         <Image style={styles.image} source={{ uri: ownerAvatarUrl }}  />
         <View style={styles.textContainer}>
-          <Text style={styles.bottomMargin} fontWeight="bold" fontSize="subheading">{fullName}</Text>
-          <Text style={styles.bottomMargin}>{description}</Text>
+          <Text style={styles.bottomMargin} fontWeight="bold" fontSize="subheading" testID={`${id}-fullName`}>{fullName}</Text>
+          <Text style={styles.bottomMargin} testID={`${id}-description`}>{description}</Text>
           <View style={styles.languageContainer}>
-            <Text style={styles.languageText} fontWeight="bold">{language}</Text>
+            <Text style={styles.languageText} fontWeight="bold" testID={`${id}-language`}>{language}</Text>
           </View>
         </View>
       </View>
-      <RepoNumbers forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount} />
+      <RepoNumbers id={id} forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount} />
     </View>
   );
 };

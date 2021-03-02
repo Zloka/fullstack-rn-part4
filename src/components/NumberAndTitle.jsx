@@ -12,12 +12,14 @@ const styles = StyleSheet.create({
   }
 });
 
+export const prettifyNumber = num => num >= 1000 ? `${Math.round((num / 1000) * 10) / 10}k` : num;
 
-const NumberAndTitle = ({ number, title }) => {
+
+const NumberAndTitle = ({ number, title, repoId }) => {
   return (
     <View style={styles.flexContainer}>
-      <Text fontWeight="bold" style={styles.number}>{number >= 1000 ? `${Math.round((number / 1000) * 10) / 10}k` : number}</Text>
-      <Text>{title}</Text>
+      <Text testID={`${repoId}-${title}-number`} fontWeight="bold" style={styles.number}>{prettifyNumber(number)}</Text>
+      <Text testID={`${repoId}-${title}`}>{title}</Text>
     </View>
   );
 };
