@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Linking from 'expo-linking';
 import { View, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { useHistory } from 'react-router-native';
 import theme from '../theme';
@@ -30,13 +31,23 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignSelf: 'flex-start'
   },
+  topMargin: {
+    marginTop: theme.margins.default
+  },
+  button: {
+    height: 40,
+    borderRadius: 4,
+    backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   languageText: {
     color: 'white'
   }
 });
 
 
-const RepositoryItem = ({ id, fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl }) => {
+const RepositoryItem = ({ id, fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl, isViewingSingleRepo, url }) => {
   const history = useHistory();
 
   return (
@@ -53,6 +64,15 @@ const RepositoryItem = ({ id, fullName, description, language, forksCount, starg
           </View>
         </View>
         <RepoNumbers id={id} forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount} />
+        {isViewingSingleRepo
+          ? (
+              <TouchableWithoutFeedback onPress={() => Linking.openURL(url)} testID="sign-in-button" >
+                <View style={[styles.button, styles.topMargin]}>
+                  <Text style={styles.languageText} fontWeight="bold">Open in GitHub</Text>
+                </View>
+              </TouchableWithoutFeedback>
+            )
+          : null}
       </View>
     </TouchableWithoutFeedback>
   );
