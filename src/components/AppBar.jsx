@@ -30,6 +30,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarRoute to="/" text="Repositories" />
+        <AppBarRoute to="/review" text="Create a review" />
         {authorizedUser ? <AppBarRoute onPress={handleSignOut} text="Sign out" /> : <AppBarRoute to="/signin" text="Sign in" />}
       </ScrollView>
     </View>
