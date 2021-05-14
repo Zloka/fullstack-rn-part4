@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { useHistory } from 'react-router-native';
 import theme from '../theme';
 import RepoNumbers from './RepoNumbers';
 import Text from './Text';
@@ -36,20 +37,24 @@ const styles = StyleSheet.create({
 
 
 const RepositoryItem = ({ id, fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl }) => {
+  const history = useHistory();
+
   return (
-    <View style={styles.container} key={id}>
-      <View style={styles.flexContainer}>
-        <Image style={styles.image} source={{ uri: ownerAvatarUrl }}  />
-        <View style={styles.textContainer}>
-          <Text style={styles.bottomMargin} fontWeight="bold" fontSize="subheading" testID={`${id}-fullName`}>{fullName}</Text>
-          <Text style={styles.bottomMargin} testID={`${id}-description`}>{description}</Text>
-          <View style={styles.languageContainer}>
-            <Text style={styles.languageText} fontWeight="bold" testID={`${id}-language`}>{language}</Text>
+    <TouchableWithoutFeedback onPress={() => history.push(`/repositories/${id}`)}>
+      <View style={styles.container} key={id}>
+        <View style={styles.flexContainer}>
+          <Image style={styles.image} source={{ uri: ownerAvatarUrl }}  />
+          <View style={styles.textContainer}>
+            <Text style={styles.bottomMargin} fontWeight="bold" fontSize="subheading" testID={`${id}-fullName`}>{fullName}</Text>
+            <Text style={styles.bottomMargin} testID={`${id}-description`}>{description}</Text>
+            <View style={styles.languageContainer}>
+              <Text style={styles.languageText} fontWeight="bold" testID={`${id}-language`}>{language}</Text>
+            </View>
           </View>
         </View>
+        <RepoNumbers id={id} forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount} />
       </View>
-      <RepoNumbers id={id} forksCount={forksCount} stargazersCount={stargazersCount} ratingAverage={ratingAverage} reviewCount={reviewCount} />
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
