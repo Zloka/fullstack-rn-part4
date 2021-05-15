@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
+import { useDebounce } from 'use-debounce';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import SortMenu from './SortMenu';
@@ -19,7 +20,7 @@ const sortMapping = {
   lowest: ['RATING_AVERAGE', 'ASC'],
 };
 
-export const RepositoryListContainer = ({ repositories, setSortOption, sortOption }) => {
+export const RepositoryListContainer = ({ repositories, setSortOption, sortOption, search, setSearch }) => {
    // Get the nodes from the edges array
    const repositoryNodes = repositories
    ? repositories.edges.map(edge => edge.node)
@@ -30,17 +31,19 @@ export const RepositoryListContainer = ({ repositories, setSortOption, sortOptio
      data={repositoryNodes}
      ItemSeparatorComponent={ItemSeparator}
      renderItem={({item}) => <RepositoryItem {...item} />}
-     ListHeaderComponent={<SortMenu setSortOption={setSortOption} sortOption={sortOption} />}
+     ListHeaderComponent={<SortMenu setSortOption={setSortOption} sortOption={sortOption} search={search} setSearch={setSearch}  />}
    />
  );
 };
 
 const RepositoryList = () => {
   const [sortOption, setSortOption] = useState('latest');
+  const [search, setSearch] = useState('');
   const sortValue = sortMapping[sortOption];
-  const { repositories } = useRepositories(sortValue);
+  const [debouncedSearchValue] = useDebounce(search, 500);
+  const { repositories } = useRepositories(sortValue, debouncedSearchValue);
 
-  return <RepositoryListContainer repositories={repositories} setSortOption={setSortOption} sortOption={sortOption} />;
+  return <RepositoryListContainer repositories={repositories} setSortOption={setSortOption} sortOption={sortOption} search={search} setSearch={setSearch} />;
 };
 
 export default RepositoryList;

@@ -1,10 +1,16 @@
 import React from 'react';
-import {View } from 'react-native';
+import { View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { Searchbar } from 'react-native-paper';
 
-const SortMenu = ({ setSortOption, sortOption }) => {
+const SortMenu = ({ setSortOption, sortOption, search, setSearch }) => {
   return (
     <View>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={setSearch}
+        value={search}
+      />
       <Picker
           selectedValue={sortOption}
           onValueChange={(itemValue) =>
