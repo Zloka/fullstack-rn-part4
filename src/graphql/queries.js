@@ -30,7 +30,7 @@ query {
 `;
 
 export const GET_SINGLE_REPOSITORY = gql`
-query Repository($id: ID!) {
+query Repository($id: ID!, $first: Int, $after: String) {
   repository(id: $id) {
     id
     fullName
@@ -42,7 +42,13 @@ query Repository($id: ID!) {
     reviewCount
     ownerAvatarUrl
     url
-    reviews {
+    reviews(first: $first, after: $after) {
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
+        totalCount
+      }
       edges {
         node {
           id
